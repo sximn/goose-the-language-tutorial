@@ -101,6 +101,8 @@ fn main() {
         var key: u8[:] = right[..0];
         var val: u8[:] = right[..0];
 
+        // print("key_at=", key_at, " val.len=", val.len);
+
         if key_at < 0 {
             key = right[..];
         } else {
@@ -112,15 +114,14 @@ fn main() {
             print("ERR");
             continue;
         }
-        
-        if cmd != "SET" && val.len > 0 {
+
+        if cmd != "SET" && key_at >= 0 {
             print("ERR");
             continue;
         }
-        
 
         if cmd == "SET" {
-            print(cmd, " key=[", key, "] val=[", val, "]");
+            print(cmd, " key=[", key, "] value=[", val, "]");
         } else {
             print(cmd, " key=[", key, "]");
         }
