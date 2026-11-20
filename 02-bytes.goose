@@ -20,4 +20,20 @@
 // Sections 4 (copies), 5 (arrays), 6 (strings), and 7 (slices).
 fn main() {
     // Your attempt goes here.
+    let bytes: u8[>..] = [];
+
+    for c in "goose" {
+        bytes.push(c);
+    }
+
+    let view: u8[:] = bytes[..2];
+
+    let snapshot: u8[..] = copy(bytes);
+
+    bytes[0] = 'G';
+    bytes.push('!');
+
+    print("owner=", bytes, " len=", bytes.len);
+    print("view=", view, " len=", view.len);
+    print("snapshot=", snapshot, " len=", snapshot.len);
 }
