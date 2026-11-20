@@ -135,7 +135,7 @@ fn main() {
         }
 
         // Validate the key
-        var invalid: bool = false;
+        var invalid: bool = key.len <= 0;
         for k in key {
             if is_whitespace(k) {
                 invalid = true;
