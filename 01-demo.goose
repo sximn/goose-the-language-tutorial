@@ -3,7 +3,7 @@ fn bump(n: i64) -> i64 {
 }
 
 fn main() {
-    let rounds = 3;
+    let rounds = 4;
     var count: i64 = 0;
     for i in rounds {
         count = bump(count);
