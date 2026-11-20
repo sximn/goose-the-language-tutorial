@@ -55,6 +55,20 @@
 import os;
 import std;
 
+fn is_whitespace(chr: u8) -> bool {
+    for i in 9..14 {
+        if chr == i {
+            return true;
+        }
+    }
+
+    if chr == 32 {
+        return true;
+    }
+
+    return false;
+}
+
 fn main() {
     // Your attempt goes here.
     var line: u8[>..] = [];
@@ -116,6 +130,19 @@ fn main() {
         }
 
         if cmd != "SET" && key_at >= 0 {
+            print("ERR");
+            continue;
+        }
+
+        // Validate the key
+        var invalid: bool = false;
+        for k in key {
+            if is_whitespace(k) {
+                invalid = true;
+                break;
+            }
+        }
+        if invalid {
             print("ERR");
             continue;
         }
