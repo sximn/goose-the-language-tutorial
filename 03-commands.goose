@@ -57,4 +57,72 @@ import std;
 
 fn main() {
     // Your attempt goes here.
+    var line: u8[>..] = [];
+
+    loop {
+        line.clear();
+
+        if !read_line(line) {
+            break;
+        }
+
+        if line == "QUIT" {
+            print("BYE");
+            break;
+        }
+
+        let cmd_at = position(line, ' ');
+        // print("cmd_at=", cmd_at);
+        if cmd_at < 0 {
+            print("ERR");
+            continue;
+        }
+
+        let left: u8[:] = line[..cmd_at];
+        let right: u8[:] = line[cmd_at + 1..];
+
+        // print("left=`", left, "` right=`", right, "`");
+
+        let cmd: u8[:] = left;
+
+        let valid_command = cmd == "SET" || cmd == "GET" || cmd == "DEL";
+        if !valid_command {
+            print("ERR");
+            continue;
+        }
+
+        let key_at = position(right, ' ');
+        // print("key_at=", key_at);
+        if cmd == "SET" && key_at < 0 {
+            print("ERR");
+            continue;
+        }
+
+        var key: u8[:] = right[..0];
+        var val: u8[:] = right[..0];
+
+        if key_at < 0 {
+            key = right[..];
+        } else {
+            key = right[..key_at];
+            val = right[key_at + 1..];
+        }
+
+        if cmd == "SET" && val.len <= 0 {
+            print("ERR");
+            continue;
+        }
+        
+        if cmd != "SET" && val.len > 0 {
+            print("ERR");
+            continue;
+        }
+        
+
+        if cmd == "SET" {
+            print(cmd, " key=[", key, "] val=[", val, "]");
+        } else {
+            print(cmd, " key=[", key, "]");
+        }
+    }
 }
