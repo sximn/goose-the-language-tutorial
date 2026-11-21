@@ -67,18 +67,16 @@ fn set(entries: Entry[>..]&, key: u8[:], value: u8[:]) {
 
 fn print_get(entries: Entry[>..]&, key: u8[:]) {
     // Your implementation goes here.
-    var last_val: u8[>..] = [];
+    var last_entry: Entry? = null;
     for entry in entries {
         if entry.key == key {
-            last_val.clear();
-            last_val.append(entry.value);
+            last_entry .= entry;
         }
     }
-    // print("key=", key, " val=", last_val, " | entries = ", entries);
-    if last_val.len == 0 {
+    if last_entry == null {
         print("MISSING");
     } else {
-        print("VALUE ", last_val);
+        print("VALUE ", last_entry.value);
     }
 }
 
