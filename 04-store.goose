@@ -60,10 +60,26 @@ struct Entry {
 
 fn set(entries: Entry[>..]&, key: u8[:], value: u8[:]) {
     // Your implementation goes here.
+    entries.push(Entry { key: key, value: value });
+    // print("> entries = ", entries);
+    print("OK");
 }
 
 fn print_get(entries: Entry[>..]&, key: u8[:]) {
     // Your implementation goes here.
+    var last_val: u8[>..] = [];
+    for entry in entries {
+        if entry.key == key {
+            last_val.clear();
+            last_val.append(entry.value);
+        }
+    }
+    // print("key=", key, " val=", last_val, " | entries = ", entries);
+    if last_val.len == 0 {
+        print("MISSING");
+    } else {
+        print("VALUE ", last_val);
+    }
 }
 
 fn main() {
